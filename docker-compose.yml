@@ -1,0 +1,43 @@
+services:
+  database:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    ports:
+      - "1433:1433"
+    container_name: PEOPLE_DB
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "Password10*"
+      MSSQL_PID: "Express"
+    volumes:
+      - sql_data:/var/opt/mssql
+    restart: unless-stopped
+    networks:
+      - helppeople_network
+
+  backend:
+    build: ./people_back
+    container_name: backend
+    restart: always
+    depends_on:
+      - sqlserver
+    ports:
+      - "3000:3000"
+    networks:
+      - helppeople_network
+
+  frontend:
+    build: ./people_front
+    container_name: frontend
+    restart: always
+    depends_on:
+      - backend
+    ports:
+      - "80:3000"
+    networks:
+      - helppeople_network
+
+volumes:
+  sql_data:
+
+networks:
+  helppeople_network:

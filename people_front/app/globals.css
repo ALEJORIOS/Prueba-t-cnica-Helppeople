@@ -1,0 +1,10 @@
+/* @import 'antd/dist/reset.css'; */
+@import 'tailwindcss';
+
+:root {
+}
+
+@theme {
+  --color-primary: #1a0f6e;
+  --color-secondary: #1677ff;
+}
