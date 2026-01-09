@@ -11,10 +11,12 @@ Descargar repositorio
 
 `git clone https://github.com/ALEJORIOS/Prueba-t-cnica-Helppeople`
 
-Entrar a este y ejecutar el comando
+Entrar a este y ejecutar el archivo
 
 ```
-docker compose up -d --build
+./deploy.bat
 ```
+
+Este configurara la migración inicial de la Base de Datos y desplegará los servicios de los contenedores.
 
 Muchas gracias por la oportunidad y buen día.

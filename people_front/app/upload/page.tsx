@@ -90,13 +90,10 @@ export default function UploadPage() {
     setUploadResult(null);
 
     try {
-      const response = await fetch(
-        'http://localhost:3000/api/productosMasivo',
-        {
-          method: 'POST',
-          body: formData,
-        },
-      );
+      const response = await fetch('http://backend:3000/api/productosMasivo', {
+        method: 'POST',
+        body: formData,
+      });
 
       const data = await response.json();
 

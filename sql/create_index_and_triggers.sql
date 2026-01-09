@@ -1,16 +1,15 @@
--- Crea los Ìndices
--- Este Ìndice se crea para que el SKU no se repita
-CREATE UNIQUE NONCLUSTERED INDEX IX_Products_SKU 
-    ON Catalog.Products(SKU) 
-    WHERE SKU IS NOT NULL;
+-- Crea los √≠ndices
+-- Este √≠ndice se crea para que el SKU no se repita
+CREATE UNIQUE NONCLUSTERED INDEX IX_Products_SKU ON Catalog.Products (SKU)
+WHERE
+    SKU IS NOT NULL;
 
--- Este Ìndice es para que los nombres de las categorÌas no se repitan
-CREATE UNIQUE NONCLUSTERED INDEX IX_Categories_Name 
-    ON Catalog.Categories(Name);
+-- Este √çndice es para que los nombres de las categor√≠as no se repitan
+CREATE UNIQUE NONCLUSTERED INDEX IX_Categories_Name ON Catalog.Categories (Name);
 GO
 
 -- Triggers
--- Los pongo para que los campos UpdatedAt de ambas tablas se actualicen autom·ticamente
+-- Los pongo para que los campos UpdatedAt de ambas tablas se actualicen automÔøΩticamente
 CREATE TRIGGER TR_Categories_UpdatedAt ON Catalog.Categories AFTER UPDATE
 AS BEGIN
     SET NOCOUNT ON;
@@ -25,3 +24,4 @@ AS BEGIN
     UPDATE Catalog.Products SET UpdatedAt = GETDATE()
     FROM Catalog.Products p INNER JOIN inserted i ON p.Id = i.Id;
 END;
+GO

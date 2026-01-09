@@ -1,6 +1,6 @@
 'use client';
 import Image from 'next/image';
-import { Button, Input, Select, Table, TableColumnsType } from 'antd';
+import { Button, Table, TableColumnsType } from 'antd';
 import { useState, useEffect } from 'react';
 import CategoryModal from '../components/category.modal';
 import { notify } from '@/services/notification.service';
@@ -45,7 +45,7 @@ export default function CategoriesPage() {
   const getCategories = async () => {
     try {
       setLoading(true);
-      const response = await fetch('http://localhost:3000/api/categorias');
+      const response = await fetch('http://backend:3000/api/categorias');
       const data = (await response.json()).map((cat: Category) => ({
         ...cat,
         key: cat.id,
@@ -73,7 +73,7 @@ export default function CategoriesPage() {
   };
 
   const deleteRecord = (id: number) => {
-    fetch(`http://localhost:3000/api/categorias/${id}`, {
+    fetch(`http://backend:3000/api/categorias/${id}`, {
       method: 'DELETE',
     })
       .then((response) => {
@@ -174,10 +174,7 @@ export default function CategoriesPage() {
 
               <div className="w-full max-w-7xl">
                 <div className="flex justify-center my-3 gap-2">
-                  <Button
-                    type="primary"
-                    onClick={showAddModal}
-                  >
+                  <Button type="primary" onClick={showAddModal}>
                     + Nueva Categoría
                   </Button>
                   <Button
