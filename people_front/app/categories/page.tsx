@@ -6,9 +6,7 @@ import CategoryModal from '../components/category.modal';
 import { notify } from '@/services/notification.service';
 
 export default function CategoriesPage() {
-  const [categories, setCategories] = useState<{ id: number; name: string }[]>(
-    [],
-  );
+  const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(false);
   const [categoryModalOpen, setCategoryModalOpen] = useState(false);
   const [editingCategory, setEditingCategory] = useState<Category | null>(null);
@@ -45,7 +43,7 @@ export default function CategoriesPage() {
   const getCategories = async () => {
     try {
       setLoading(true);
-      const response = await fetch('http://backend:3000/api/categorias');
+      const response = await fetch('http://localhost:3000/api/categorias');
       const data = (await response.json()).map((cat: Category) => ({
         ...cat,
         key: cat.id,
@@ -73,7 +71,7 @@ export default function CategoriesPage() {
   };
 
   const deleteRecord = (id: number) => {
-    fetch(`http://backend:3000/api/categorias/${id}`, {
+    fetch(`http://localhost:3000/api/categorias/${id}`, {
       method: 'DELETE',
     })
       .then((response) => {

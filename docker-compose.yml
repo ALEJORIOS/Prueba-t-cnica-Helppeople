@@ -1,9 +1,10 @@
+name: helppeople_stack
 services:
   database:
     image: mcr.microsoft.com/mssql/server:2022-latest
     ports:
       - "1433:1433"
-    container_name: PEOPLE_DB
+    container_name: helppeople_db
     environment:
       ACCEPT_EULA: "Y"
       MSSQL_SA_PASSWORD: "Password10*"
@@ -14,20 +15,15 @@ services:
     restart: unless-stopped
     networks:
       - helppeople_network
-    healthcheck:
-      test: /opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P YourStrong@Password123 -C -Q "SELECT 1" || exit 1
-      interval: 10s
-      timeout: 3s
-      retries: 10
-      start_period: 10s
 
   backend:
-    build: ./people_back
-    container_name: backend
+    build: 
+      context: ./people_back
+      dockerfile: Dockerfile
+    container_name: helppeople_backend
     restart: always
     depends_on:
-      database:
-        condition: service_healthy
+      - database
     ports:
       - "3000:3000"
     volumes:
@@ -35,23 +31,19 @@ services:
       - /app/node_modules
     networks:
       - helppeople_network
-    command: npm run start:dev
 
   frontend:
-    build: ./people_front
-    container_name: frontend
+    build: 
+      context: ./people_front
+      dockerfile: Dockerfile
+    container_name: helppeople_frontend
     restart: always
     depends_on:
-      - backend
+      - database
     ports:
-      - "80:3000"
-    volumes:
-      - ./people_front:/app
-      - /app/node_modules
-      - /app/.next
+      - "3002:3000"
     networks:
       - helppeople_network
-    command: npm run dev
 
 volumes:
   sqlserver_data:

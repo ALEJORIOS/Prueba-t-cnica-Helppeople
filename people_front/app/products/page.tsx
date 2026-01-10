@@ -62,7 +62,7 @@ export default function ProductsPage() {
 
   const getCategories = async () => {
     try {
-      const response = await fetch('http://backend:3000/api/categorias');
+      const response = await fetch('http://localhost:3000/api/categorias');
       const data = await response.json();
       setCategories(data);
     } catch (error) {
@@ -94,7 +94,7 @@ export default function ProductsPage() {
       }
 
       const response = await fetch(
-        `http://backend:3000/api/productos?${params.toString()}`,
+        `http://localhost:3000/api/productos?${params.toString()}`,
       );
       const data = await response.json();
 
@@ -166,7 +166,7 @@ export default function ProductsPage() {
   }, [searchText, selectedCategory, priceMin, priceMax]);
 
   const deleteRecord = (id: number) => {
-    fetch(`http://backend:3000/api/productos/${id}`, {
+    fetch(`http://localhost:3000/api/productos/${id}`, {
       method: 'DELETE',
     })
       .then((response) => {

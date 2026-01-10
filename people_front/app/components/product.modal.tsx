@@ -8,7 +8,7 @@ export default function ProductModal({ record, isEditing, open, onResponse }) {
   const [categories, setCategories] = useState<Category[]>([]);
 
   const getAvailableCategories = () => {
-    fetch('http://backend:3000/api/categorias')
+    fetch('http://localhost:3000/api/categorias')
       .then((response) => response.json())
       .then((data) => {
         setCategories(data);
@@ -40,7 +40,7 @@ export default function ProductModal({ record, isEditing, open, onResponse }) {
     }
     setConfirmLoading(true);
     fetch(
-      `http://backend:3000/api/productos${isEditing ? `/${record.id}` : ''}`,
+      `http://localhost:3000/api/productos${isEditing ? `/${record.id}` : ''}`,
       {
         method: isEditing ? 'PUT' : 'POST',
         headers: {

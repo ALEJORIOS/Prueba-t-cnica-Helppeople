@@ -25,7 +25,7 @@ export default function CategoryModal({ record, isEditing, open, onResponse }) {
       .then((values) => {
         setConfirmLoading(true);
         fetch(
-          `http://backend:3000/api/categorias${
+          `http://localhost:3000/api/categorias${
             isEditing ? `/${record.id}` : ''
           }`,
           {

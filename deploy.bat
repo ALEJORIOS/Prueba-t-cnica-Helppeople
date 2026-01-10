@@ -68,22 +68,19 @@ docker exec %CONTAINER_NAME% /opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P
 echo.
 
 echo [6/6] Iniciando todos los servicios...
-docker-compose up -d
+docker-compose up -d --build frontend backend
 echo.
 
 echo ========================================
-echo   INICIALIZACION COMPLETADA
+echo   INICIALIZACIÓN COMPLETADA
 echo ========================================
 echo.
 echo Servicios disponibles:
-echo   Frontend:  http://localhost:80
+echo   Frontend:  http://localhost:3001
 echo   Backend:   http://localhost:3000
 echo   Database:  localhost:1433
 echo.
 echo Para ver los logs:
 echo   docker-compose logs -f
-echo.
-echo Para detener todo:
-echo   docker-compose down
 echo.
 pause

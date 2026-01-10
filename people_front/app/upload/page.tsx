@@ -1,6 +1,5 @@
 'use client';
 import { useState, useRef } from 'react';
-import { WarningOutlined } from '@ant-design/icons';
 import { useRouter } from 'next/navigation';
 import {
   Upload,
@@ -90,10 +89,13 @@ export default function UploadPage() {
     setUploadResult(null);
 
     try {
-      const response = await fetch('http://backend:3000/api/productosMasivo', {
-        method: 'POST',
-        body: formData,
-      });
+      const response = await fetch(
+        'http://localhost:3000/api/productosMasivo',
+        {
+          method: 'POST',
+          body: formData,
+        },
+      );
 
       const data = await response.json();
 
@@ -412,7 +414,6 @@ export default function UploadPage() {
 
               {uploadResult.success === 'incomplete' && (
                 <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 flex items-start gap-3">
-                  <WarningOutlined className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
                   <div className="flex-1">
                     <h3 className="font-semibold text-amber-900 mb-1">
                       Carga parcialmente exitosa
