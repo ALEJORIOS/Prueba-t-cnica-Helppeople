@@ -76,7 +76,7 @@ echo   INICIALIZACIÓN COMPLETADA
 echo ========================================
 echo.
 echo Servicios disponibles:
-echo   Frontend:  http://localhost:3001
+echo   Frontend:  http://localhost:3002
 echo   Backend:   http://localhost:3000
 echo   Database:  localhost:1433
 echo.
